@@ -1,0 +1,19 @@
+version: "3.0"
+services:
+  rabbitmq:
+    build:
+      context: .
+    image: fullee/rabbitmq:3.8.1-management-delayed-alpine
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./volume/data:/var/lib/rabbitmq
+    environment:
+      - "RABBITMQ_DEFAULT_USER=admin"
+      - "RABBITMQ_DEFAULT_PASS=admin"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
